@@ -1,0 +1,32 @@
+#left {
+   width:250px;
+   height:250px;
+   backgroiund-color: red;
+   float: left;
+   margin-left: 63px;
+}
+#center {
+   width:250px;
+   height:250px;
+   backgroiund-color: red;
+   float: left;
+   margin-left: 45px;
+}
+#right {
+   width:250px;
+   height:250px;
+   backgroiund-color: red;
+   float: left;
+   margin-left: 45px;
+}
+
+body {
+   background-image: url("img/images.jpg");
+   background-repeat: repeat-yx;
+}
+h1 {
+  text-align: center;
+}
+h2 {
+text-align: center;
+}
