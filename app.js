@@ -79,4 +79,35 @@ function productClicks(){
     li.innerText = dataStr;
     ul.appendChild(li);
   }
+  var canvas = document.getElementById('canvas');
+  var ctx = canvas.getContext('2d');
+
+  var Product = [];
+  var Clicks = [];
+
+  var data = {
+    labels: [],
+    datasets: [{
+      label: 'Clicks',
+      data: studentHeights,
+      backgroundColor: 'red'
+    }, {
+      label: 'Student Ages',
+      data: studentAges
+    }]
+  };
+
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero:true
+          }
+        }]
+      }
+    }
+  });
 }
