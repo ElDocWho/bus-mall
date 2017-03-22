@@ -50,7 +50,7 @@ function randomImage(){
 };
 randomImage();
 
-var clickLimit = 25;
+var clickLimit = 5;
 function handleTheClick(){
   randomImage();
   totalClicks++;
@@ -62,6 +62,12 @@ function handleTheClick(){
     img2.removeEventListener('click', handleTheClick);
     img3.removeEventListener('click', handleTheClick);
     productClicks();
+    localStorage['totalVotes'] = JSON.stringify(totalVotes);
+    console.log(totalVotes);
+    currentVotes.push(totalVotes);
+    console.log(currentVotes);
+    renderChart();
+    sumArray(totalVotes);
   }
 };
 
@@ -71,35 +77,27 @@ img3.addEventListener('click', handleTheClick);
 
 var graphNames = [];
 var totalVotes = [];
+var totalShown = [];
+
 function productClicks(){
 
   for (var i = 0; i < productArray.length; i++) {
     totalVotes.push(productArray[i].itemClick);
     graphNames.push(productArray[i].itemName);
+    totalShown.push(productArray[i].imageShown);
   }
-  var canvas = document.getElementById('canvas');
-  var ctx = canvas.getContext('2d');
-
-  var data = {
-    labels: graphNames,
-    datasets: [{
-      label: 'Times CLicked',
-      data: totalVotes,
-      backgroundColor: 'red',
-    }]
-  };
-
-  var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: data,
-    options: {
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero:true
-          }
-        }]
-      }
-    }
-  });
-}
+};
+var currentVotes = [];
+var summedVotes = [];
+function sumArray(currentVotes) {
+  if (JSON.parse(localStorage.getItem('accumVotes'))) {
+    var accumVotes = JSON.parse(localStorage.getItem('accumVotes'));
+  } else {
+    var accumVotes = [];
+  }
+  for (var i = 0; i < Math.max(currentVotes.length, accumVotes.length); i++) {
+    summedVotes[i] = ((currentVotes[i] || 0) + (accumVotes[i] || 0));
+  }
+  localStorage['accumVotes'] = JSON.stringify(summedVotes);
+  return summedVotes;
+};
