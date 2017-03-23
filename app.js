@@ -6,6 +6,8 @@ var productArray = [];
 var img1 = document.getElementById('left');
 var img2 = document.getElementById('center');
 var img3 = document.getElementById('right');
+var button = document.getElementById('resultsbutton').style.visibility = 'hidden';
+var button = document.getElementById('playagainbutton').style.visibility = 'hidden';
 var totalClicks = 0;
 
 function Products(itemName, itemPath) {
@@ -50,7 +52,7 @@ function randomImage(){
 };
 randomImage();
 
-var clickLimit = 5;
+var clickLimit = 25;
 function handleTheClick(){
   randomImage();
   totalClicks++;
@@ -63,11 +65,17 @@ function handleTheClick(){
     img3.removeEventListener('click', handleTheClick);
     productClicks();
     localStorage['totalVotes'] = JSON.stringify(totalVotes);
-    console.log(totalVotes);
     currentVotes.push(totalVotes);
-    console.log(currentVotes);
+    localStorage['totalShown'] = JSON.stringify(totalShown);
+    currentShown.push(totalShown);
+    sumVoteArray(totalVotes);
+    sumShownArray(totalShown);
+    // var body = document.getElementsByTagName(body);
+    // var main = document.getElementById('content');
+    // body.removeChild(main);
+    // var button = document.getElementById('resultsbutton').style.visibility = 'visible';
+    // var button = document.getElementById('playagainbutton').style.visibility = 'visible';
     renderChart();
-    sumArray(totalVotes);
   }
 };
 
@@ -85,11 +93,15 @@ function productClicks(){
     totalVotes.push(productArray[i].itemClick);
     graphNames.push(productArray[i].itemName);
     totalShown.push(productArray[i].imageShown);
+    // localStorage['graphNames'] = JSON.stringify(graphNames);
   }
 };
 var currentVotes = [];
 var summedVotes = [];
-function sumArray(currentVotes) {
+var currentShown = [];
+var summedShown = [];
+
+function sumVoteArray(currentVotes) {
   if (JSON.parse(localStorage.getItem('accumVotes'))) {
     var accumVotes = JSON.parse(localStorage.getItem('accumVotes'));
   } else {
@@ -100,4 +112,17 @@ function sumArray(currentVotes) {
   }
   localStorage['accumVotes'] = JSON.stringify(summedVotes);
   return summedVotes;
+};
+
+function sumShownArray(currentShown) {
+  if (JSON.parse(localStorage.getItem('accumShown'))) {
+    var accumShown = JSON.parse(localStorage.getItem('accumShown'));
+  } else {
+    var accumShown = [];
+  }
+  for (var i = 0; i < Math.max(currentShown.length, accumShown.length); i++) {
+    summedShown[i] = ((currentShown[i] || 0) + (accumShown[i] || 0));
+  }
+  localStorage['accumShown'] = JSON.stringify(summedShown);
+  return summedShown;
 };

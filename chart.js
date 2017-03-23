@@ -4,16 +4,19 @@ var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 
 function renderChart(){
+  // var summedVotes = localStorage['accumVotes'];
+  // var summedShown = localStorage['accumShown'];
+  // var graphNames = localStorage['graphNames'];
   var data = {
     labels: graphNames,
     datasets: [{
       label: 'Times Clicked',
-      data: totalVotes,
+      data: summedVotes,
       backgroundColor: 'red',
     },
     {
       label: 'Times Shown',
-      data: totalShown,
+      data: summedShown,
       backgroundColor: 'blue',
     }]
   };
@@ -32,3 +35,4 @@ function renderChart(){
     }
   });
 };
+// renderChart();
