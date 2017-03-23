@@ -53,7 +53,7 @@ function randomImage(){
 };
 randomImage();
 
-var clickLimit = 5;
+var clickLimit = 25;
 function handleTheClick(){
   setTimeout(randomImage, 100);
   totalClicks++;
