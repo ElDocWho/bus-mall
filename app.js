@@ -6,6 +6,8 @@ var productArray = [];
 var img1 = document.getElementById('left');
 var img2 = document.getElementById('center');
 var img3 = document.getElementById('right');
+var button = document.getElementById('resultsbutton').style.visibility = 'hidden';
+var button = document.getElementById('playagainbutton').style.visibility = 'hidden';
 var totalClicks = 0;
 
 function Products(itemName, itemPath) {
@@ -62,6 +64,18 @@ function handleTheClick(){
     img2.removeEventListener('click', handleTheClick);
     img3.removeEventListener('click', handleTheClick);
     productClicks();
+    localStorage['totalVotes'] = JSON.stringify(totalVotes);
+    currentVotes.push(totalVotes);
+    localStorage['totalShown'] = JSON.stringify(totalShown);
+    currentShown.push(totalShown);
+    sumVoteArray(totalVotes);
+    sumShownArray(totalShown);
+    // var body = document.getElementsByTagName(body);
+    // var main = document.getElementById('content');
+    // body.removeChild(main);
+    // var button = document.getElementById('resultsbutton').style.visibility = 'visible';
+    // var button = document.getElementById('playagainbutton').style.visibility = 'visible';
+    renderChart();
   }
 };
 
@@ -71,35 +85,44 @@ img3.addEventListener('click', handleTheClick);
 
 var graphNames = [];
 var totalVotes = [];
+var totalShown = [];
+
 function productClicks(){
 
   for (var i = 0; i < productArray.length; i++) {
     totalVotes.push(productArray[i].itemClick);
     graphNames.push(productArray[i].itemName);
+    totalShown.push(productArray[i].imageShown);
+    // localStorage['graphNames'] = JSON.stringify(graphNames);
   }
-  var canvas = document.getElementById('canvas');
-  var ctx = canvas.getContext('2d');
+};
+var currentVotes = [];
+var summedVotes = [];
+var currentShown = [];
+var summedShown = [];
 
-  var data = {
-    labels: graphNames,
-    datasets: [{
-      label: 'Times CLicked',
-      data: totalVotes,
-      backgroundColor: 'red',
-    }]
-  };
+function sumVoteArray(currentVotes) {
+  if (JSON.parse(localStorage.getItem('accumVotes'))) {
+    var accumVotes = JSON.parse(localStorage.getItem('accumVotes'));
+  } else {
+    var accumVotes = [];
+  }
+  for (var i = 0; i < Math.max(currentVotes.length, accumVotes.length); i++) {
+    summedVotes[i] = ((currentVotes[i] || 0) + (accumVotes[i] || 0));
+  }
+  localStorage['accumVotes'] = JSON.stringify(summedVotes);
+  return summedVotes;
+};
 
-  var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: data,
-    options: {
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero:true
-          }
-        }]
-      }
-    }
-  });
-}
+function sumShownArray(currentShown) {
+  if (JSON.parse(localStorage.getItem('accumShown'))) {
+    var accumShown = JSON.parse(localStorage.getItem('accumShown'));
+  } else {
+    var accumShown = [];
+  }
+  for (var i = 0; i < Math.max(currentShown.length, accumShown.length); i++) {
+    summedShown[i] = ((currentShown[i] || 0) + (accumShown[i] || 0));
+  }
+  localStorage['accumShown'] = JSON.stringify(summedShown);
+  return summedShown;
+};
