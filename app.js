@@ -6,8 +6,9 @@ var productArray = [];
 var img1 = document.getElementById('left');
 var img2 = document.getElementById('center');
 var img3 = document.getElementById('right');
-var button = document.getElementById('resultsbutton').style.visibility = 'hidden';
-var button = document.getElementById('playagainbutton').style.visibility = 'hidden';
+var button1 = document.getElementById('resultsbutton').style.visibility = 'hidden';
+var button2 = document.getElementById('playagainbutton').style.visibility = 'hidden';
+var button3 = document.getElementById('clearstorage').style.visibility = 'hidden';
 var totalClicks = 0;
 
 function Products(itemName, itemPath) {
@@ -52,9 +53,9 @@ function randomImage(){
 };
 randomImage();
 
-var clickLimit = 25;
+var clickLimit = 5;
 function handleTheClick(){
-  randomImage();
+  setTimeout(randomImage, 100);
   totalClicks++;
   var productIdx = this.alt;
   productArray[productIdx].itemClick++;
@@ -70,12 +71,12 @@ function handleTheClick(){
     currentShown.push(totalShown);
     sumVoteArray(totalVotes);
     sumShownArray(totalShown);
-    // var body = document.getElementsByTagName(body);
-    // var main = document.getElementById('content');
-    // body.removeChild(main);
-    // var button = document.getElementById('resultsbutton').style.visibility = 'visible';
-    // var button = document.getElementById('playagainbutton').style.visibility = 'visible';
-    renderChart();
+    var body = document.getElementsByTagName('body')[0];
+    var main = document.getElementById('content');
+    body.removeChild(main);
+    var button1 = document.getElementById('resultsbutton').style.visibility = 'visible';
+    var button2 = document.getElementById('playagainbutton').style.visibility = 'visible';
+    var button3 = document.getElementById('clearstorage').style.visibility = 'visible';
   }
 };
 
@@ -126,3 +127,9 @@ function sumShownArray(currentShown) {
   localStorage['accumShown'] = JSON.stringify(summedShown);
   return summedShown;
 };
+
+var button3 = document.getElementById('clearstorage');
+function clearStorage(){
+  localStorage.clear();
+};
+button3.addEventListener('click', clearStorage);

@@ -1,36 +1,61 @@
+#left, #center, #right {
+  margin-top: 100px;
+  transition-property: rotate;
+  transition-duration: 2s;
+  transition-timing-function: linear;
+  transition-delay: 2s;
+  border: 1px solid black;
+}
+
 #left {
    width:350px;
    height:350px;
-   backgroiund-color: red;
+   background-color: red;
    float: left;
    margin-left: 180px;
+   border-radius: 10px;
 }
+
+#left:hover, #center:hover, #right:hover {
+  transform: scale(1.1) rotate(5deg);
+  cursor: pointer;
+}
+
 #center {
    width:350px;
    height:350px;
-   backgroiund-color: red;
+   background-color: red;
    float: left;
    margin-left: 45px;
+   border-radius: 10px;
 }
+
 #right {
    width:350px;
    height:350px;
-   backgroiund-color: red;
+   background-color: red;
    float: left;
    margin-left: 45px;
+   border-radius: 10px;
 }
 
 body {
    background-image: url("img/images.jpg");
    background-repeat: repeat-yx;
-}
-h1 {
-  text-align: center;
-}
-h2 {
-text-align: center;
+   margin: auto;
 }
 
-#resultsbutton {
+h1 {
+  text-align: center;
+  font-family: 'Fascinate Inline', cursive;
+  font-size: 3em;
+}
+
+h2 {
+  text-align: center;
+}
+
+#buttons {
   margin: auto;
+  text-align: center;
 }

@@ -5,11 +5,12 @@
     <link rel="stylesheet" href="stylesheet.css" />
     <title>Bus Mall Day 1</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js" charset="utf-8"></script>
+    <link href="https://fonts.googleapis.com/css?family=Fascinate+Inline" rel="stylesheet">
   </head>
   <body>
     <header>
       <h1>BUS MALL</h1>
-      <h2>Product Selection</h2>
+      <h2>~  Choose your favorite product of the three shown ~</h2>
     </header>
     <main id="content">
       <div class="images">
@@ -21,11 +22,15 @@
       <div class="images">
         <img src="" alt="" id="right" />
       </div>
-      <div class="clearfix"></div>
-      <input type="button" onclick="location.href='chart.html';" id="resultsbutton" name="results" value="Click for Results" />
-      <input type="button" onclick="location.href='index.html';" id="playagainbutton" name="playagain" value="Click to play again" />
-
     </main>
+    <div class="clearfix"></div>
+    <section id="buttons">
+        <div class="buttons">
+        <input type="button" onclick="" id="resultsbutton" name="results" value="Click for Results" />
+        <input type="button" onclick="location.href='index.html';" id="playagainbutton" name="playagain" value="Click to Play Again" />
+        <input type="button" onclick="" id="clearstorage" name="playagain" value="Click to Clear Storage" />
+      </div>
+    </section>
     <canvas id="canvas" width="300" height="100"></canvas>
 
     <script src="app.js" charset="utf-8" type="text/javascript"></script>

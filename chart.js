@@ -2,11 +2,10 @@
 
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
+var button1 = document.getElementById('resultsbutton');
 
-function renderChart(){
-  // var summedVotes = localStorage['accumVotes'];
-  // var summedShown = localStorage['accumShown'];
-  // var graphNames = localStorage['graphNames'];
+function handleTheChart() {
+
   var data = {
     labels: graphNames,
     datasets: [{
@@ -35,4 +34,5 @@ function renderChart(){
     }
   });
 };
-// renderChart();
+
+button1.addEventListener('click', handleTheChart);
